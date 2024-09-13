@@ -4,39 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/97443397e6.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Login Page</title>
 </head>
 
 <body class="bg-gradient-to-r from-black/50 to-black/50">
-<div class="m-auto mt-48" style="background-image: url('/images/note1.jpg');  background-position: center; width: 600px; height: 400px; opacity: 0.8;">
+    <div class="m-auto mt-48"
+        style="background-image: url('/images/note1.jpg');  background-position: center; width: 600px; height: 400px; opacity: 0.8;">
 
 
-    <h1 class="text-center p-4 text-5xl text-green-300 font-extrabold">Login</h1>
+        <h1 class="text-center p-4 text-5xl text-green-300 font-extrabold">Login</h1>
 
-    <div class="text-center mt-8">
-        <form action="/Login" method="post">
+        <div class="text-center mt-8">
+            <form action="/Login" method="post">
 
-        <div>
-            <label for="Name" class="text-2xl font-extrabold text-white">Username:</label>
-            <input type="Name" id="name" name="username" class="border-2 border-transparent w-[250px] h-[40px]" required autocomplete="off">
+                <div>
+                    <label for="Name" class="text-2xl font-extrabold text-white">Username:</label>
+                    <input type="Name" id="name" name="username" class="border-2 border-transparent w-[250px] h-[40px]"
+                        required autocomplete="off">
+                </div>
+
+                <div class="mt-8 relative">
+                    <label for="Password" class="font-extrabold text-white text-2xl">Password:</label>
+                    <input type="Password" id="password" name="password"
+                        class="border-2 border-transparent w-[250px] h-[40px]" required autocomplete="off">
+                    <i class="fa-solid fa-eye absolute right-3 top-5 text-red cursor-pointer" id="togglePassword"></i>
+                </div>
+
         </div>
 
-        <div class="mt-8">
-            <label for="Password" class="font-extrabold text-white text-2xl">Password:</label>
-            <input type="Password" id="password" name="password" class="border-2 border-transparent w-[250px] h-[40px]"  required autocomplete="off">
+        <div class="flex justify-center mt-4">
+            <button type="submit" class="text-center text-2xl ml-16 text-extrabold text-green-300">Login</button>
         </div>
+        </form>
+
+        <p class="text-center mt-8 text-white text-2xl">Don't have an account? <a href="/Register"
+                class="text-green-300 text-2xl">Register</a></p>
 
     </div>
-    
-    <div class="flex justify-center mt-4">
-        <button type="submit" class="text-center text-2xl ml-16 text-extrabold text-green-300">Login</button>
-    </div>
-</form>
 
-   <p class="text-center mt-8 text-white text-2xl">Don't have an account? <a href="/Register" class="text-green-300 text-2xl">Register</a></p>
+    <!-- <script>
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
 
-</div>
+        togglePassword.addEventListener('click', () => {
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle the eye icon
+            togglePassword.classList.toggle('fa-eye');
+            togglePassword.classList.toggle('fa-eye-slash');
+        });
+
+    </script> -->
 
 </body>
 

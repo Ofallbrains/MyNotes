@@ -17,6 +17,10 @@ connectDB();
 
 app.use(express.static('public'));
 
+app.get('/Dashboard', (req, res) => {
+    res.render("Dashboard")
+})
+
 
 app.get('/Login', (req, res) => {
     res.render("Login")
@@ -54,7 +58,7 @@ app.post("/Register", async (req, res) => {
             password: hashPassword
         });
 
-        
+
         await newUser.save();
         console.log("User registered successfully!");
 
@@ -71,7 +75,7 @@ app.post("/Register", async (req, res) => {
 app.post("/Login", async (req, res) => {
     try {
 
-        const {username, password} = req.body;
+        const { username, password } = req.body;
         // Checks if the user exists
         const user = await User.findOne({ name: username });
         if (!user) {
