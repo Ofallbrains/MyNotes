@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/97443397e6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>View Note</title>
+</head>
+
+<body class="bg-[#FEF9D9]">
+
+    <nav class="flex flex-row justify-between p-16 ">
+        <div class="flex flex-row">
+            <a href="/Home">
+                <h1 class="text-2xl font-bold">My</h1>
+            </a>
+            <a href="/Home">
+                <h1 class="text-green-600 text-2xl font-bold">Notes</h1>
+            </a>
+        </div>
+
+        <div class="flex flex-row">
+            <input type="text" placeholder="Search Your Notes"
+                class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
+            <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-12"></i></a>
+
+        </div>
+
+
+        <button class="font-bold text-xl mr-20 text-green-600 ">Logout</button>
+
+    </nav>
+
+    <header>
+        <div class="flex ml-36 gap-2 ">
+            <a href="/Home">
+                <p class="text-green-600 text-2xl underline">Home</p>
+            </a>
+            <span class="text-2xl">/</span>
+            <p class="text-2xl">View Note</p>
+        </div>
+
+
+        <form action="/note/update/<%= note._id %>" method="POST" class="ml-36 mt-4">
+            <div>
+                <input required class="w-[800px] border border-gray-300 p-2 rounded-md" type="text" name="title"
+                    id="title" value="<%= note.title %>" placeholder="Title">
+            </div>
+
+            <div class="mt-4">
+                <textarea required class="w-[800px] h-[400px] border border-gray-300 p-2 rounded-md" name="body"
+                    id="body" placeholder="Write a note..." rows="12"><%= note.body %></textarea>
+            </div>
+
+            <div class="mt-4">
+                <!-- Update button -->
+                <button type="submit"
+                    class="border-transparent w-[100px] bg-green-600 text-white rounded-2xl h-[30px]">Update</button>
+            </div>
+        </form>
+
+        <form action="/note/delete/<%= note._id %>" method="POST" class="ml-36 mt-2">
+            <button type="submit"
+                class="border-transparent w-[100px] bg-red-600 text-white rounded-2xl h-[30px]">Delete</button>
+        </form>
+
+    </header>
+
+
+</body>
+
+</html>
