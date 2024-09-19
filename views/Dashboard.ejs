@@ -13,40 +13,73 @@
 
 </head>
 
-<body style="background-image: url('/images/note2.jpg');  background-size: cover; opacity: 0.9; ">
+<style>
+    @keyframes fading {
+        0% {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .animate-fading {
+        animation: fading 5s ease forwards;
+    }
+</style>
+
+<body class="p-4" style="background-image: url('/images/note.jpg');  background-size: cover; opacity: 1; ">
 
     <nav class="flex flex-row justify-between">
 
         <div class="flex flex-row gap-[2px] p-12">
-            <h1 class="text-white font-nerko cursor-pointer text-3xl" style="font-weight: 400;">My</h1>
-            <h1 class="text-green-300 text-3xl cursor-pointer">Notes</h1>
+            <h1 class="text-white font-nerko cursor-pointer  text-4xl" style="font-weight: 400;">My</h1>
+            <h1 class="text-green-600 text-4xl cursor-pointer">Notes</h1>
         </div>
 
         <div class="flex flex-row p-12 gap-12">
             <a href="/Login" class="text-white font-bold p-[5px] text-3xl">Login</a>
             <a href="/Register"
-                class="text-white font-bold text-3xl border-2 bg-green-600 border-transparent p-[2px] w-[180px] h-[45px] text-center rounded-3xl">Register</a>
+                class="text-white font-bold text-3xl border-2 bg-green-600 border-transparent p-[2px] w-[160px] h-[45px] text-center rounded-3xl">Register</a>
         </div>
 
     </nav>
 
     <header>
-        <div class="flex flex-row gap-4 justify-center">
-            <h2 class="text-white text-5xl">Write down your thoughts!</h2>
-            <a href=""><i class="fa-solid fa-pen text-white"></i></a>
+        <div class="flex flex-row gap-8 p-4 mt-12 justify-center">
+            <h2 class="text-white text-6xl font-bold animate-fading">Write down your thoughts!</h2>
+            <a href=""><i class="fa-solid animate-fading mt-4 text-3xl fa-pen text-white"></i></a>
         </div>
-        <p class="text-white text-center">Organise your daily tasjs by capturing down your ideas, thoughts and reminders
-            all in one
-            place!</p>
-        <p class="text-white text-center"> To help you stay <span>productive</span>and <span>creative!</span></p>
 
-        <p class="text-white text-center">Create your notes today as you explore the features!</p>
+        <div class="p-4">
+            <p class="text-white font-bold text-2xl text-center">Organise your daily tasks by capturing down your ideas,
+                thoughts and <br>
+                reminders
+                all in one
+                place!</p>
+            <p class="text-white text-center mt-2 font-bold text-2xl"> To help you stay <span
+                    class="text-green-600">productive</span> and
+                <span class="text-green-600">creative!</span>
+            </p>
 
-        <button class="bg-green-600 text-white items-center m-auto">Let's get started</button>
+            <p class="text-white font-bold text-2xl mt-2 text-center">Create your notes today as you explore the
+                features!
+            </p>
+        </div>
+
+        <div class="flex mt-8 justify-center">
+            <a href="/Register"><button
+                    class="bg-green-600 text-white font-bold w-[250px] text-2xl p-2 rounded-3xl">Let's get
+                    started</button></a>
+        </div>
+
     </header>
 
     <footer>
-        <p class="text-white">&copy; 2024 MyNotes. All rights reserved</p>
+        <p class="text-white  font-bold text-2xl mt-[200px] p-4">&copy; 2024 MyNotes. All rights reserved</p>
     </footer>
 
 
