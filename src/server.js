@@ -112,13 +112,14 @@ app.post('/Home/add', async (req, res) => {
 });
 
 
-
-
-
 // Register User
 app.post("/Register", async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, password, Confirm } = req.body;
+
+        if (password !== Confirm) {
+            return res.send('Password do not match')
+        }
 
         // Check if the user already exists
         const existUser = await User.findOne({ name: username });

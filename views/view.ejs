@@ -54,14 +54,16 @@
                     id="body" placeholder="Write a note..." rows="12"><%= note.body %></textarea>
             </div>
 
-            <div class="mt-4">
-                <!-- Update button -->
+            <!-- Update and Delete buttons -->
+            <div class="mt-4 flex space-x-4">
+                <!-- Update button inside the form -->
                 <button type="submit"
                     class="border-transparent w-[100px] bg-green-600 text-white rounded-2xl h-[30px]">Update</button>
             </div>
         </form>
 
-        <form action="/note/delete/<%= note._id %>" method="POST" class="ml-36 mt-2">
+        <!-- Delete form on the same line -->
+        <form action="/note/delete/<%= note._id %>" method="POST" class="ml-36 mt-4">
             <button type="submit"
                 class="border-transparent w-[100px] bg-red-600 text-white rounded-2xl h-[30px]">Delete</button>
         </form>
