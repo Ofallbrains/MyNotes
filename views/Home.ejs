@@ -39,8 +39,9 @@
         </div>
 
         <div class="flex flex-row">
-            <input type="text" class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
-            <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-8"></i></a>
+            <input type="text" placeholder="Search Your Notes"
+                class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
+            <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-12"></i></a>
 
         </div>
 
@@ -49,23 +50,45 @@
     </nav>
 
     <header>
-        <div class="flex flex-row justify-between">
-            <h2 class="font-bold text-2xl ml-28 ">Hey there</h2>
+
+
+        <div class="flex flex-row ml-44 justify-between">
+            <h2 class="font-bold text-2xl">My Notes</h2>
             <button class="flex border-transparent w-[120px] rounded-2xl bg-green-600 gap-2 mr-24 flex-row border-2 ">
-                <a href="/add"><i class="fa-solid fa-plus font-bold mt-[6px]   "></i></a>
+                <a href="/add"><i class="fa-solid fa-plus font-bold mt-[6px] "></i></a>
                 <a href="/add">
                     <p class="text-xl">New note</p>
                 </a>
             </button>
         </div>
-
-        <div class="p-12 ml-32">
-            <p class="font-bold">Let's get started with your first note</p>
-            <div>
-                <a href="/add" class="animate-fading font-bold text-green-600 underline">Create one</a>
-                <a href="/add"><i class="fa-regular ml-4 text-green-600 fa-hand-point-left"></i></a>
-            </div>
+        <div class="flex p-4 ml-20 flex-wrap gap-6">
+            <% if (notes.length> 0) { %>
+                <% notes.forEach(function(note) { %>
+                    <a href="/note/<%= note._id %>" class="mb-8 p-4 border-2 border-gray-300 w-[300px] h-[200px]>
+                        shadow-lg bg-white">
+                        <h3 class="text-xl text-green-600 font-bold">
+                            <%= note.title %>
+                        </h3>
+                        <p>
+                            <%= note.body %>
+                        </p>
+                    </a>
+                    <% }); %>
         </div>
+        <% } else { %>
+
+
+
+            <div class="p-12 ml-32">
+                <p class="font-bold">Let's get started with your first note</p>
+                <div>
+                    <a href="/add" class="animate-fading font-bold text-green-600 underline">Create one</a>
+                    <a href="/add"><i class="fa-regular ml-4 text-green-600 fa-hand-point-left"></i></a>
+                </div>
+            </div>
+            <% } %>
+
+
     </header>
 </body>
 

@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', false);
+
 const connectDB = async () => {
     try {
         const connect = await mongoose.connect(process.env.MONGO_URI)
@@ -25,12 +26,29 @@ const LoginSchema = new mongoose.Schema({
 
 })
 
+const NoteSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    body: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
 const User = mongoose.model("users", LoginSchema)
+const Note = mongoose.model("notes", NoteSchema);
 
 
 module.exports = {
     connectDB,
-    User
+    User,
+    Note
 }
 
 
