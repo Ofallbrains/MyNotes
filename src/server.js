@@ -17,7 +17,7 @@ connectDB();
 
 app.use(express.static('public'));
 
-app.get('/Dashboard', (req, res) => {
+app.get('/', (req, res) => {
     res.render("Dashboard")
 })
 
@@ -99,7 +99,7 @@ app.post("/Login", async (req, res) => {
 })
 
 // app listening on port 3000
-const port = 5000;
+const port = 3000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 })

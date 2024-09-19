@@ -1,11 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/97443397e6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>HomePage</title>
 </head>
-<body>
-    
+
+<style>
+    @keyframes fading {
+        0% {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .animate-fading {
+        animation: fading 5s ease forwards;
+    }
+</style>
+
+<body class="bg-[#FEF9D9]">
+    <nav class="flex flex-row justify-between p-16 ">
+        <div class="flex flex-row">
+            <a href="/Home">
+                <h1 class="text-2xl font-bold">My</h1>
+            </a>
+            <a href="/Home">
+                <h1 class="text-green-600 text-2xl font-bold">Notes</h1>
+            </a>
+        </div>
+
+        <div class="flex flex-row">
+            <input type="text" class="border-2 border-transparent rounded-3xl w-[400px]">
+            <a href=""><i class="fa-solid fa-magnifying-glass relative top-2 text-xl right-8"></i></a>
+
+        </div>
+
+        <button class="bg-green-600 font-bold text-2xl w-[120px] h-[40px]  rounded-3xl ">Logout</button>
+
+    </nav>
+
+    <header class="p-8">
+        <div class="flex flex-row justify-between">
+            <h2>Hey</h2>
+            <button
+                class="flex rounded-3xl  border-transparent bg-green-600 w-[150px] h-[40px] gap-4 flex-row border-2 ">
+                <i class="fa-solid fa-plus relative font-bold text-xl  "></i>
+                <p class="font-bold text-2xl">New note</p>
+            </button>
+        </div>
+
+        <div class="p-8">
+            <p>Let's get started with your first note</p>
+            <a href="" class="animate-fading">Create one</a>
+        </div>
+    </header>
 </body>
+
 </html>
