@@ -69,6 +69,25 @@ app.get('/note/:id', async (req, res) => {
     }
 });
 
+// Search route to filter notes by title or body
+app.get('/search', async (req, res) => {
+    const searchTerm = req.query.q; // `q` will be the query parameter
+    try {
+        const searchResults = await Note.find({
+            $or: [
+                { title: { $regex: searchTerm, $options: 'i' } }, // case-insensitive search
+                { body: { $regex: searchTerm, $options: 'i' } }   // case-insensitive search
+            ]
+        });
+
+        res.render('Home', { notes: searchResults });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error fetching search results");
+    }
+});
+
+
 app.post('/Home/add', async (req, res) => {
     try {
         const { title, body } = req.body;

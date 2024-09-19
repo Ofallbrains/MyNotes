@@ -39,9 +39,16 @@
         </div>
 
         <div class="flex flex-row">
-            <input type="text" placeholder="Search Your Notes"
+            <!-- <input type="text" placeholder="Search Your Notes"
                 class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
-            <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-12"></i></a>
+            <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-12"></i></a> -->
+            <form action="/search" method="GET" class="flex">
+                <input type="text" name="q" placeholder="Search Your Notes"
+                    class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-12"></i>
+                </button>
+            </form>
 
         </div>
 
