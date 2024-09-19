@@ -35,6 +35,10 @@ app.get('/Home', (req, res) => {
     res.render("Home")
 })
 
+app.get('/add', (req, res)=>{
+    res.render("add")
+})
+
 
 
 // Register User

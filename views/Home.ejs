@@ -39,28 +39,32 @@
         </div>
 
         <div class="flex flex-row">
-            <input type="text" class="border-2 border-transparent rounded-3xl w-[400px]">
-            <a href=""><i class="fa-solid fa-magnifying-glass relative top-2 text-xl right-8"></i></a>
+            <input type="text" class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
+            <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-8"></i></a>
 
         </div>
 
-        <button class="bg-green-600 font-bold text-2xl w-[120px] h-[40px]  rounded-3xl ">Logout</button>
+        <button class="font-bold text-xl mr-20 text-green-600 ">Logout</button>
 
     </nav>
 
-    <header class="p-8">
+    <header>
         <div class="flex flex-row justify-between">
-            <h2>Hey</h2>
-            <button
-                class="flex rounded-3xl  border-transparent bg-green-600 w-[150px] h-[40px] gap-4 flex-row border-2 ">
-                <i class="fa-solid fa-plus relative font-bold text-xl  "></i>
-                <p class="font-bold text-2xl">New note</p>
+            <h2 class="font-bold text-2xl ml-28 ">Hey there</h2>
+            <button class="flex border-transparent w-[120px] rounded-2xl bg-green-600 gap-2 mr-24 flex-row border-2 ">
+                <a href="/add"><i class="fa-solid fa-plus font-bold mt-[6px]   "></i></a>
+                <a href="/add">
+                    <p class="text-xl">New note</p>
+                </a>
             </button>
         </div>
 
-        <div class="p-8">
-            <p>Let's get started with your first note</p>
-            <a href="" class="animate-fading">Create one</a>
+        <div class="p-12 ml-32">
+            <p class="font-bold">Let's get started with your first note</p>
+            <div>
+                <a href="/add" class="animate-fading font-bold text-green-600 underline">Create one</a>
+                <a href="/add"><i class="fa-regular ml-4 text-green-600 fa-hand-point-left"></i></a>
+            </div>
         </div>
     </header>
 </body>
