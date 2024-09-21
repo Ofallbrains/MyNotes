@@ -1,8 +1,10 @@
 const express = require('express')
 const path = require('path')
 const bcrypt = require('bcrypt')
-require('dotenv').config();
 const { connectDB, User, Note } = require('./config')
+const session = require('express-session');
+require('dotenv').config();
+
 
 const app = express();
 
@@ -87,21 +89,37 @@ app.get('/search', async (req, res) => {
     }
 });
 
-// Logout Route
 app.get('/logout', (req, res) => {
-    // Destroy the session
-    req.session.destroy((err) => {
+    if (req.session) {
+        // Destroy the session
+        req.session.destroy((err) => {
+            if (err) {
+                return res.status(500).send('Error logging out.');
+            } else {
+                // Clear the cookie and redirect to login
+                res.clearCookie('connect.sid');
+                res.redirect('/Login');
+            }
+        });
+    } else {
+        res.redirect('/Login');
+    }
+});
+
+app.post('/logout', (req, res) => {
+    console.log('Session before destroying:', req.session);  // Log session data before destroying
+    req.session.destroy(err => {
         if (err) {
-            console.error("Error during logout: ", err);
-            return res.status(500).send("Error logging out.");
+            return res.status(500).send('Failed to logout');
         }
-        // Clear cookie if you're using one
-        res.clearCookie('connect.sid'); // The default session cookie name in Express
-        // Redirect to login page
         res.redirect('/login');
     });
 });
 
+app.use((req, res, next) => {
+    console.log(req.session);
+    next();
+});
 
 
 app.post('/Home/add', async (req, res) => {
@@ -223,6 +241,13 @@ app.post('/note/delete/:id', async (req, res) => {
         res.status(500).send("Error deleting note");
     }
 });
+
+app.use(session({
+    secret: 'youcan_put_the_blameonme',  // Replace with a strong secret key
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }   // For production, set secure to true with HTTPS
+}));
 
 
 
