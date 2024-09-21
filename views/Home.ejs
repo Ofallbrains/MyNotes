@@ -39,9 +39,7 @@
         </div>
 
         <div class="flex flex-row">
-            <!-- <input type="text" placeholder="Search Your Notes"
-                class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
-            <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-12"></i></a> -->
+
             <form action="/search" method="GET" class="flex">
                 <input type="text" name="q" placeholder="Search Your Notes"
                     class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
@@ -52,12 +50,11 @@
 
         </div>
 
-        <button class="font-bold text-xl mr-20 text-green-600 ">Logout</button>
+        <button class="font-bold text-xl mr-20 text-green-600" onclick="handleLogout()">Logout</button>
 
     </nav>
 
     <header>
-
 
         <div class="flex flex-row ml-44 justify-between">
             <h2 class="font-bold text-2xl">My Notes</h2>
@@ -67,7 +64,9 @@
                         + New note</p>
                 </a>
             </button>
+
         </div>
+
         <div class="flex p-4 ml-20 flex-wrap gap-6">
             <% if (notes.length> 0) { %>
                 <% notes.forEach(function(note) { %>
@@ -84,15 +83,15 @@
         </div>
         <% } else { %>
 
-
-
             <div class="p-12 ml-32">
                 <p class="font-bold">Let's get started with your first note</p>
                 <div>
                     <a href="/add" class="animate-fading font-bold text-green-600 underline">Create one</a>
                     <a href="/add"><i class="fa-regular ml-4 text-green-600 fa-hand-point-left"></i></a>
                 </div>
+
             </div>
+
             <% } %>
 
     </header>
@@ -100,6 +99,20 @@
     <footer>
         <p class=" font-bold text-xl  p-4">&copy; 2024 MyNotes. All rights reserved</p>
     </footer>
+
+
+    <script>
+        function handleLogout() {
+            fetch('/logout', {
+                method: 'GET',
+            })
+                .then(response => {
+                    // Redirect to login page after successful logout
+                    window.location.href = '/Login';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
 
 </body>
 

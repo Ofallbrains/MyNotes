@@ -87,6 +87,22 @@ app.get('/search', async (req, res) => {
     }
 });
 
+// Logout Route
+app.get('/logout', (req, res) => {
+    // Destroy the session
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Error during logout: ", err);
+            return res.status(500).send("Error logging out.");
+        }
+        // Clear cookie if you're using one
+        res.clearCookie('connect.sid'); // The default session cookie name in Express
+        // Redirect to login page
+        res.redirect('/login');
+    });
+});
+
+
 
 app.post('/Home/add', async (req, res) => {
     try {
