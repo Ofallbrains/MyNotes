@@ -4,34 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
     <script src="https://kit.fontawesome.com/97443397e6.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/script.js"></script>
     <title>HomePage</title>
 </head>
 
-<style>
-    @keyframes fading {
-        0% {
-            opacity: 0;
-            transform: translateX(20px);
-        }
 
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    .animate-fading {
-        animation: fading 5s ease forwards;
-    }
-</style>
-
-<body class="bg-[#FEF9D9]">
+<body style="background-image: url('/images/note.jpg');  background-size: cover;">
     <nav class="flex flex-row justify-between p-16 ">
         <div class="flex flex-row">
             <a href="/Home">
-                <h1 class="text-2xl font-bold">My</h1>
+                <h1 class="text-2xl text-white font-bold">My</h1>
             </a>
             <a href="/Home">
                 <h1 class="text-green-600 text-2xl font-bold">Notes</h1>
@@ -50,17 +35,18 @@
 
         </div>
 
-        <button class="font-bold text-xl mr-20 text-green-600" onclick="handleLogout()">Logout</button>
+        <button class="font-bold text-2xl mr-20 text-green-600" onclick="handleLogout()">Logout</button>
 
     </nav>
 
     <header>
 
         <div class="flex flex-row ml-44 justify-between">
-            <h2 class="font-bold text-2xl">My Notes</h2>
-            <button class="flex border-transparent w-[120px] rounded-2xl bg-green-600 gap-2 mr-24 flex-row border-2 ">
+            <h2 class="font-bold text-white text-2xl">My Notes</h2>
+            <button
+                class="flex border-transparent w-[150px] justify-center rounded-2xl bg-green-600 gap-2 mr-24 flex-row border-2 ">
                 <a href="/add">
-                    <p class="text-xl text-center">
+                    <p class="text-xl text-white">
                         + New note</p>
                 </a>
             </button>
@@ -97,22 +83,9 @@
     </header>
 
     <footer>
-        <p class=" font-bold text-xl  p-4">&copy; 2024 MyNotes. All rights reserved</p>
+        <p class=" font-bold text-xl  text-white p-4">&copy; 2024 MyNotes.</p>
     </footer>
 
-
-    <script>
-        function handleLogout() {
-            fetch('/logout', {
-                method: 'GET',
-            })
-                .then(response => {
-                    // Redirect to login page after successful logout
-                    window.location.href = '/Login';
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
 
 </body>
 

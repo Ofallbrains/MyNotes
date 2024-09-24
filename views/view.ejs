@@ -9,12 +9,12 @@
     <title>View Note</title>
 </head>
 
-<body class="bg-[#FEF9D9]">
+<body style="background-image: url('/images/note.jpg');  background-size: cover;">
 
     <nav class="flex flex-row justify-between p-16 ">
         <div class="flex flex-row">
             <a href="/Home">
-                <h1 class="text-2xl font-bold">My</h1>
+                <h1 class="text-2xl text-white font-bold">My</h1>
             </a>
             <a href="/Home">
                 <h1 class="text-green-600 text-2xl font-bold">Notes</h1>
@@ -28,8 +28,7 @@
 
         </div>
 
-
-        <button class="font-bold text-xl mr-20 text-green-600 ">Logout</button>
+        <button class="font-bold text-2xl mr-20 text-green-600 ">Logout</button>
 
     </nav>
 
@@ -38,8 +37,8 @@
             <a href="/Home">
                 <p class="text-green-600 text-2xl underline">Home</p>
             </a>
-            <span class="text-2xl">/</span>
-            <p class="text-2xl">View Note</p>
+            <span class="text-2xl text-white">/</span>
+            <p class="text-2xl text-white">View Note</p>
         </div>
 
 
@@ -54,15 +53,13 @@
                     id="body" placeholder="Write a note..." rows="12"><%= note.body %></textarea>
             </div>
 
-            <!-- Update and Delete buttons -->
             <div class="mt-4 flex space-x-4">
-                <!-- Update button inside the form -->
                 <button type="submit"
                     class="border-transparent w-[100px] bg-green-600 text-white rounded-2xl h-[30px]">Update</button>
             </div>
+
         </form>
 
-        <!-- Delete form on the same line -->
         <form action="/note/delete/<%= note._id %>" method="POST" class="ml-36 mt-4">
             <button type="submit"
                 class="border-transparent w-[100px] bg-red-600 text-white rounded-2xl h-[30px]">Delete</button>

@@ -12,12 +12,12 @@
     <title>Add</title>
 </head>
 
-<body class="bg-[#FEF9D9]">
+<body style="background-image: url('/images/note.jpg');  background-size: cover;">
 
     <nav class="flex flex-row justify-between p-16 ">
         <div class="flex flex-row">
             <a href="/Home">
-                <h1 class="text-2xl font-bold">My</h1>
+                <h1 class="text-2xl text-white font-bold">My</h1>
             </a>
             <a href="/Home">
                 <h1 class="text-green-600 text-2xl font-bold">Notes</h1>
@@ -25,12 +25,13 @@
         </div>
 
         <div class="flex flex-row">
-            <input type="text" class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
+            <input type="text" placeholder="Search Your Notes"
+                class="border-2 border-transparent rounded-3xl h-[45px] w-[400px]">
             <a href=""><i class="fa-solid fa-magnifying-glass relative text-green-600 top-2 text-xl right-8"></i></a>
 
         </div>
 
-        <button class="font-bold text-xl mr-20 text-green-600 ">Logout</button>
+        <button class="font-bold text-2xl mr-20 text-green-600 ">Logout</button>
 
     </nav>
 
@@ -39,10 +40,10 @@
             <a href="/Home">
                 <p class="text-green-600 text-2xl underline">Home</p>
             </a>
-            <span class="text-2xl">/</span>
-            <p class="text-2xl">Add Note</p>
+            <span class="text-2xl text-white">/</span>
+            <p class="text-2xl text-white">Add Note</p>
         </div>
-        <p class="ml-36 text-2xl mt-4 font-bold">Add Note</p>
+        <p class="ml-36 text-2xl text-white mt-4 font-bold">Add Note</p>
 
 
         <form action="/Home/add" method="POST" class="ml-36 mt-4">
@@ -56,7 +57,8 @@
             </div>
 
             <div class="">
-                <button type="submit" class="border-transparent w-[100px] mt-4 bg-green-600 rounded-2xl h-[30px]">+ Add
+                <button type="submit"
+                    class="border-transparent w-[100px] mt-4 bg-green-600 rounded-2xl h-[30px] text-white">+ Add
                     Note</button>
             </div>
         </form>
