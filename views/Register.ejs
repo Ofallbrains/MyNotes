@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -69,6 +69,126 @@
         });
 
     </script>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/97443397e6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Register</title>
+</head>
+
+<body class="bg-gradient-to-r from-black/50 to-black/50">
+    <div class="m-auto mt-48"
+        style="background-image: url('/images/note1.jpg');  background-position: center; width: 600px; height: 400px; opacity: 0.8;">
+
+
+        <h1 class="text-center p-4 text-5xl text-green-300 font-extrabold">Register</h1>
+
+        <div class="text-center mt-8">
+            <form action="/Register" method="post" id="registerForm">
+
+                <div>
+                    <label for="name" class="text-2xl font-extrabold text-white">Username:</label>
+                    <input type="text" id="name" name="username" class="border-2 border-transparent w-[250px] h-[40px]"
+                        required autocomplete="off">
+                    <p id="usernameError" class="text-red-500 hidden">Please enter a username</p>
+                </div>
+
+                <div class="mt-6 ml-6">
+                    <label for="password" class="font-extrabold text-white text-2xl">Password:</label>
+                    <input type="password" id="password" name="password"
+                        class="border-2 border-transparent w-[250px] h-[40px]" required autocomplete="off">
+                    <i class="fa-solid fa-eye right-8 relative text-green-600 cursor-pointer" id="togglePassword"></i>
+                    <p id="passwordError" class="text-red-500 hidden">Password must be at least 6 characters long</p>
+                </div>
+
+                <div class="mt-6 mr-20">
+                    <label for="confirmpassword" class="font-extrabold  text-white text-2xl">Confirm Password:</label>
+                    <input type="password" id="confirmpassword" name="Confirm"
+                        class="border-2 border-transparent  w-[250px] h-[40px]" required autocomplete="off">
+                    <i class="fa-solid fa-eye right-8 relative text-green-600 cursor-pointer"
+                        id="toggleConfirmPassword"></i>
+                    <p id="confirmPasswordError" class="text-red-500 hidden">Passwords do not match</p>
+                </div>
+
+                <div class="flex justify-center mt-4">
+                    <button type="submit" class="text-center text-2xl ml-16 text-extrabold text-green-300">Sign
+                        Up</button>
+                </div>
+            </form>
+
+            <p class="text-center mt-8 text-white text-2xl">Already have an account? <a href="/Login"
+                    class="text-green-300 text-2xl">Login</a></p>
+
+        </div>
+
+        <script>
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmpassword');
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const form = document.getElementById('registerForm');
+
+            // Toggle Password Visibility
+            togglePassword.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.classList.toggle('fa-eye');
+                togglePassword.classList.toggle('fa-eye-slash');
+            });
+
+            toggleConfirmPassword.addEventListener('click', () => {
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                toggleConfirmPassword.classList.toggle('fa-eye');
+                toggleConfirmPassword.classList.toggle('fa-eye-slash');
+            });
+
+            // Form Validation
+            form.addEventListener('submit', (e) => {
+                let valid = true;
+
+                // Username validation
+                const username = document.getElementById('name').value;
+                if (username === '') {
+                    document.getElementById('usernameError').classList.remove('hidden');
+                    valid = false;
+                } else {
+                    document.getElementById('usernameError').classList.add('hidden');
+                }
+
+                // Password validation
+                const password = passwordInput.value;
+                if (password.length < 6) {
+                    document.getElementById('passwordError').classList.remove('hidden');
+                    valid = false;
+                } else {
+                    document.getElementById('passwordError').classList.add('hidden');
+                }
+
+                // Confirm password validation
+                const confirmPassword = confirmPasswordInput.value;
+                if (password !== confirmPassword) {
+                    document.getElementById('confirmPasswordError').classList.remove('hidden');
+                    valid = false;
+                } else {
+                    document.getElementById('confirmPasswordError').classList.add('hidden');
+                }
+
+                // If form is not valid, prevent submission
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
+        </script>
 
 </body>
 

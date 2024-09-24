@@ -26,17 +26,13 @@ app.get('/', (req, res) => {
     res.render("Dashboard")
 })
 
-
 app.get('/Login', (req, res) => {
     res.render("Login")
 })
 
-
 app.get('/Register', (req, res) => {
     res.render("Register")
 })
-
-
 
 app.get('/Home', async (req, res) => {
     try {
@@ -44,7 +40,7 @@ app.get('/Home', async (req, res) => {
         const notes = await Note.find();
 
         // Render the Home view and pass the notes
-        res.render("Home", { notes });
+        res.render("Home", { notes, isSearch: false });
     } catch (error) {
         console.error(error);
         res.status(500).send("Error fetching notes");
@@ -71,18 +67,18 @@ app.get('/note/:id', async (req, res) => {
     }
 });
 
-// Search route to filter notes by title or body
+// Search notes by title or body
 app.get('/search', async (req, res) => {
     const searchTerm = req.query.q; // `q` will be the query parameter
     try {
         const searchResults = await Note.find({
             $or: [
-                { title: { $regex: searchTerm, $options: 'i' } }, // case-insensitive search
-                { body: { $regex: searchTerm, $options: 'i' } }   // case-insensitive search
+                { title: { $regex: searchTerm, $options: 'i' } },
+                { body: { $regex: searchTerm, $options: 'i' } }
             ]
         });
 
-        res.render('Home', { notes: searchResults });
+        res.render('Home', { notes: searchResults, isSearch: true });
     } catch (error) {
         console.error(error);
         res.status(500).send("Error fetching search results");
@@ -91,12 +87,11 @@ app.get('/search', async (req, res) => {
 
 app.get('/logout', (req, res) => {
     if (req.session) {
-        // Destroy the session
         req.session.destroy((err) => {
             if (err) {
                 return res.status(500).send('Error logging out.');
             } else {
-                // Clear the cookie and redirect to login
+
                 res.clearCookie('connect.sid');
                 res.redirect('/Login');
             }
@@ -105,46 +100,6 @@ app.get('/logout', (req, res) => {
         res.redirect('/Login');
     }
 });
-
-app.post('/logout', (req, res) => {
-    console.log('Session before destroying:', req.session);  // Log session data before destroying
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).send('Failed to logout');
-        }
-        res.redirect('/login');
-    });
-});
-
-app.use((req, res, next) => {
-    console.log(req.session);
-    next();
-});
-
-
-app.post('/Home/add', async (req, res) => {
-    try {
-        const { title, body } = req.body;
-
-        // Create a new note
-        const newNote = new Note({
-            title,
-            body
-        });
-
-        // Save the note to the database
-        await newNote.save();
-
-        console.log("Note added successfully!");
-
-        // Redirect to the Home page after saving the note
-        res.redirect('/Home');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Error adding note");
-    }
-});
-
 
 // Register User
 app.post("/Register", async (req, res) => {
@@ -155,7 +110,7 @@ app.post("/Register", async (req, res) => {
             return res.send('Password do not match')
         }
 
-        // Check if the user already exists
+        // Checks if the user already exists
         const existUser = await User.findOne({ name: username });
         if (existUser) {
             return res.send("User already exists");
@@ -165,17 +120,16 @@ app.post("/Register", async (req, res) => {
         const saltRounds = 10;
         const hashPassword = await bcrypt.hash(password, saltRounds);
 
-        // Create a new user document using Mongoose
+        // Creates a new user document using Mongoose
         const newUser = new User({
             name: username,
             password: hashPassword
         });
 
-
         await newUser.save();
         console.log("User registered successfully!");
 
-        // Redirect to login page 
+        // Redirects to login page 
         res.redirect("/Login");
 
     } catch (error) {
@@ -195,7 +149,7 @@ app.post("/Login", async (req, res) => {
             return res.send("Username not found");
 
         }
-        // Compare passwords
+        // Compares passwords
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (isPasswordMatch) {
 
@@ -211,7 +165,47 @@ app.post("/Login", async (req, res) => {
     }
 })
 
-// Route to update a note
+
+app.post('/logout', (req, res) => {
+    console.log('Session before destroying:', req.session);
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send('Failed to logout');
+        }
+        res.redirect('/login');
+    });
+});
+
+app.use((req, res, next) => {
+    console.log(req.session);
+    next();
+});
+
+
+app.post('/Home/add', async (req, res) => {
+    try {
+        const { title, body, } = req.body;
+
+        // Create a new note
+        const newNote = new Note({
+            title,
+            body,
+
+        });
+
+        await newNote.save();
+
+        console.log("Note added successfully!");
+
+        res.redirect('/Home');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error adding note");
+    }
+});
+
+
+// Updating the note
 app.post('/note/update/:id', async (req, res) => {
     try {
         const noteId = req.params.id;
@@ -219,41 +213,29 @@ app.post('/note/update/:id', async (req, res) => {
 
         await Note.findByIdAndUpdate(noteId, { title, body });
 
-        res.redirect('/Home'); // Redirect to Home after updating
+        res.redirect('/Home');
     } catch (error) {
         console.error(error);
         res.status(500).send("Error updating note");
     }
 });
 
-
-
-
-// Route to delete a note
+// Deleting a note
 app.post('/note/delete/:id', async (req, res) => {
     try {
         const noteId = req.params.id;
         await Note.findByIdAndDelete(noteId);
 
-        res.redirect('/Home'); // Redirect to Home after deletion
+        res.redirect('/Home');
     } catch (error) {
         console.error(error);
         res.status(500).send("Error deleting note");
     }
 });
 
-app.use(session({
-    secret: 'youcan_put_the_blameonme',  // Replace with a strong secret key
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false }   // For production, set secure to true with HTTPS
-}));
-
-
-
-
 // app listening on port 3000
 const port = 3000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 })
+

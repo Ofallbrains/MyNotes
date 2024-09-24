@@ -11,56 +11,81 @@
 
 <body class="bg-gradient-to-r from-black/50 to-black/50">
     <div class="m-auto mt-48"
-        style="background-image: url('/images/note1.jpg');  background-position: center; width: 600px; height: 400px; opacity: 0.8;">
-
-
+        style="background-image: url('/images/note1.jpg'); background-position: center; width: 600px; height: 400px; opacity: 0.8;">
         <h1 class="text-center p-4 text-5xl text-green-300 font-extrabold">Login</h1>
 
         <div class="text-center mt-8">
-            <form action="/Login" method="post">
-
+            <form action="/Login" method="post" id="loginForm">
                 <div>
-                    <label for="Name" class="text-2xl font-extrabold text-white">Username:</label>
-                    <input type="Name" id="name" name="username" class="border-2 border-transparent w-[250px] h-[40px]"
+                    <label for="name" class="text-2xl font-extrabold text-white">Username:</label>
+                    <input type="text" id="name" name="username" class="border-2 border-transparent w-[250px] h-[40px]"
                         required autocomplete="off">
+                    <p id="nameError" class="text-red-500 hidden">Username is required</p>
                 </div>
 
-                <div class="mt-8 ml-7 ">
-                    <label for="Password" class="font-extrabold text-white text-2xl">Password:</label>
-                    <input type="Password" id="password" name="password"
+                <div class="mt-8 ml-7">
+                    <label for="password" class="font-extrabold text-white text-2xl">Password:</label>
+                    <input type="password" id="password" name="password"
                         class="border-2 border-transparent w-[250px] h-[40px]" required autocomplete="off">
                     <i class="fa-solid fa-eye right-8 relative text-green-600 cursor-pointer" id="togglePassword"></i>
+                    <p id="passwordError" class="text-red-500 hidden">Password is required</p>
                 </div>
 
+                <div class="flex justify-center mt-4">
+                    <button type="submit" id="loginBtn"
+                        class="text-center text-2xl ml-16 text-extrabold text-green-300">Login</button>
+                </div>
+            </form>
+
+            <p class="text-center mt-8 text-white text-2xl">Don't have an account? <a href="/Register"
+                    class="text-green-300 text-2xl">Register</a></p>
         </div>
-
-        <div class="flex justify-center mt-4">
-            <button type="submit" id="loginBtn"
-                class="text-center text-2xl ml-16 text-extrabold text-green-300">Login</button>
-        </div>
-        </form>
-
-        <p class="text-center mt-8 text-white text-2xl">Don't have an account? <a href="/Register"
-                class="text-green-300 text-2xl">Register</a></p>
-
     </div>
 
     <script>
+        const loginForm = document.getElementById('loginForm');
+        const nameInput = document.getElementById('name');
         const passwordInput = document.getElementById('password');
-        const togglePassword = document.getElementById('togglePassword');
+        const nameError = document.getElementById('nameError');
+        const passwordError = document.getElementById('passwordError');
 
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
         togglePassword.addEventListener('click', () => {
-            // Toggle the type attribute
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-
-            // Toggle the eye icon
-            togglePassword.classList.toggle('fa-eye');
             togglePassword.classList.toggle('fa-eye-slash');
+            togglePassword.classList.toggle('fa-eye');
         });
 
 
 
+
+        // Form validation
+        loginForm.addEventListener('submit', (e) => {
+            let valid = true;
+
+            // Validate username
+            if (nameInput.value.trim() === "") {
+                nameError.classList.remove('hidden');
+                valid = false;
+            } else {
+                nameError.classList.add('hidden');
+            }
+
+            // Validate password
+            if (passwordInput.value.trim() === "") {
+                passwordError.classList.remove('hidden');
+                valid = false;
+            } else {
+                passwordError.classList.add('hidden');
+            }
+
+            // Prevent form submission if validation fails
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
     </script>
 
 </body>
