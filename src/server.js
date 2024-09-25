@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const bcrypt = require('bcrypt')
 const { connectDB, User, Note } = require('./config')
+const jwt = require('jsonwebtoken');
 const session = require('express-session');
 require('dotenv').config();
 
@@ -47,6 +48,8 @@ app.get('/Home', async (req, res) => {
     }
 });
 
+
+
 app.get('/add', (req, res) => {
     res.render("add")
 })
@@ -69,7 +72,7 @@ app.get('/note/:id', async (req, res) => {
 
 // Search notes by title or body
 app.get('/search', async (req, res) => {
-    const searchTerm = req.query.q; // `q` will be the query parameter
+    const searchTerm = req.query.q;
     try {
         const searchResults = await Note.find({
             $or: [
@@ -77,7 +80,6 @@ app.get('/search', async (req, res) => {
                 { body: { $regex: searchTerm, $options: 'i' } }
             ]
         });
-
         res.render('Home', { notes: searchResults, isSearch: true });
     } catch (error) {
         console.error(error);
@@ -100,6 +102,9 @@ app.get('/logout', (req, res) => {
         res.redirect('/Login');
     }
 });
+
+
+
 
 // Register User
 app.post("/Register", async (req, res) => {
@@ -139,31 +144,28 @@ app.post("/Register", async (req, res) => {
 });
 
 // Login user
-app.post("/Login", async (req, res) => {
+app.post('/Login', async (req, res) => {
     try {
-
         const { username, password } = req.body;
-        // Checks if the user exists
         const user = await User.findOne({ name: username });
         if (!user) {
             return res.send("Username not found");
-
         }
+
         // Compares passwords
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (isPasswordMatch) {
-
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.redirect("/Home");
 
         } else {
-            res.send("Wrong password");
-
+            res.status(401).send("Wrong password");
         }
-    } catch {
+    } catch (error) {
         console.error(error);
         res.status(500).send("Error during login");
     }
-})
+});
 
 
 app.post('/logout', (req, res) => {
@@ -232,6 +234,7 @@ app.post('/note/delete/:id', async (req, res) => {
         res.status(500).send("Error deleting note");
     }
 });
+
 
 // app listening on port 3000
 const port = 3000;
