@@ -36,11 +36,6 @@ const NoteSchema = new mongoose.Schema({
         required: true
     },
 
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User', // Assuming you have a User model
-    //     required: true,
-    // },
 
     createdAt: {
         type: Date,
