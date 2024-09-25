@@ -7,7 +7,26 @@ User Authentication: User can register or login to access his notes
 Creating notes: Using the form a user can create his/ her notes
 Managing notes: User has the ability to update the created note or delete it. The user also can search the notes by title or word.
 
-# Create a .env file to store your credentials. Example 
-MONGODB_URI = mongodb+srv://<username>:<password>@mongodburlhere
 
-#
+
+# Technologies used
+Backend: Node.js, Express.js, MongoDB (Mongoose)
+Frontend: EJS, Tailwind CSS
+Database: MongoDB (Atlas)
+
+# Setup Instruction
+Install the following:
+NodeJs, Git
+
+Clone the repository
+Step 1: git clone https://github.com/Ofallbrains/MyNotes.git
+        cd MyNotes-app
+
+Step 2: npm install
+
+Step 3: Setup environment variables
+MONGO_URI=mongodb+srv://yourMongoDBURI
+JWT_SECRET=yourJWTSecret
+
+# Start the server
+nodemon/yourserver.js
